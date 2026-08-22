@@ -1,11 +1,8 @@
 -- Hyprland Lua config entrypoint.
 -- Split modules mirror the old hyprland.conf source order.
 
-local configHome = os.getenv("XDG_CONFIG_HOME") or ((os.getenv("HOME") or "") .. "/.config")
-local hyprDir = configHome .. "/hypr"
-
 local function load_module(name)
-  dofile(hyprDir .. "/lua/" .. name .. ".lua")
+  require("lua/" .. name)
 end
 
 load_module("helpers")
