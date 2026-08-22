@@ -186,12 +186,6 @@ hl.bind("SUPER + P", H.dispatch("pseudo", ""), {
 hl.bind("SUPER + M", H.dispatch("layoutmsg", "splitratio 0.3 exact"), {
   description = "set split ratio 0.3",
 })
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("$scriptsDir/ChangeLayout.sh init"))
-end)
-hl.on("config.reloaded", function()
-  hl.exec_cmd(expand("$scriptsDir/ChangeLayout.sh init"))
-end)
 hl.bind("ALT + tab", H.dispatch("cyclenext", ""), {
   description = "cycle next window",
 })

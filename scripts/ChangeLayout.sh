@@ -214,30 +214,38 @@ fi
 case "$target_layout" in
   master)
     set_layout_compat master
-    set_focus_binds master
-    set_move_binds master
+    if ! is_lua_provider; then
+      set_focus_binds master
+      set_move_binds master
+    fi
     if [ "$show_notification" = true ]; then
       notify-send -e -u low -i "$notif" " Master Layout"
     fi
     ;;
   dwindle)
     set_layout_compat dwindle
-    set_focus_binds dwindle
-    set_move_binds dwindle
+    if ! is_lua_provider; then
+      set_focus_binds dwindle
+      set_move_binds dwindle
+    fi
     if [ "$show_notification" = true ]; then
       notify-send -e -u low -i "$notif" " Dwindle Layout"
     fi
     ;;
   scroller)
     set_layout_compat scroller
-    set_focus_binds scroller
-    set_move_binds scroller
+    if ! is_lua_provider; then
+      set_focus_binds scroller
+      set_move_binds scroller
+    fi
     if [ "$show_notification" = true ]; then
       notify-send -e -u low -i "$notif" " Scroller Layout"
     fi
     ;;
   *)
-    set_focus_binds "$target_layout"
-    set_move_binds "$target_layout"
+    if ! is_lua_provider; then
+      set_focus_binds "$target_layout"
+      set_move_binds "$target_layout"
+    fi
     ;;
 esac
