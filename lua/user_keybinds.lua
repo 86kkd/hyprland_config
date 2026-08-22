@@ -18,43 +18,43 @@ hl.bind("SUPER + F9", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenRecord.sh -s")),
 hl.bind("SUPER + F8", hl.dsp.exec_cmd(expand("pkill -INT -x wf-recorder")), {
   description = "stop screen recording",
 })
-hl.bind("CTRL + SHIFT + F", hl.dsp.exec_cmd("hyprctl dispatch togglefloating"), {
+hl.bind("CTRL + SHIFT + F", H.dispatch("togglefloating", ""), {
   description = "Float current window",
 })
-hl.bind("CTRL + Q", hl.dsp.exec_cmd("hyprctl dispatch killactive"), {
+hl.bind("CTRL + Q", H.dispatch("killactive", ""), {
   description = "close active window",
 })
-hl.bind("CTRL + SHIFT + H", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace -1"), {
+hl.bind("CTRL + SHIFT + H", H.dispatch("movetoworkspace", "-1"), {
   description = "move to previous workspace",
 })
-hl.bind("CTRL + SHIFT + L", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace +1"), {
+hl.bind("CTRL + SHIFT + L", H.dispatch("movetoworkspace", "+1"), {
   description = "move to next workspace",
 })
-hl.bind("SUPER + ALT + h", hl.dsp.exec_cmd("hyprctl dispatch swapwindow l"), {
+hl.bind("SUPER + ALT + h", H.dispatch("swapwindow", "l"), {
   description = "swap window left",
 })
-hl.bind("SUPER + ALT + j", hl.dsp.exec_cmd("hyprctl dispatch swapwindow d"), {
+hl.bind("SUPER + ALT + j", H.dispatch("swapwindow", "d"), {
   description = "swap window down",
 })
-hl.bind("SUPER + ALT + k", hl.dsp.exec_cmd("hyprctl dispatch swapwindow u"), {
+hl.bind("SUPER + ALT + k", H.dispatch("swapwindow", "u"), {
   description = "swap window up",
 })
-hl.bind("SUPER + ALT + l", hl.dsp.exec_cmd("hyprctl dispatch swapwindow r"), {
+hl.bind("SUPER + ALT + l", H.dispatch("swapwindow", "r"), {
   description = "swap window right",
 })
-hl.bind("SUPER + CTRL + h", hl.dsp.exec_cmd("hyprctl dispatch movewindow l"), {
+hl.bind("SUPER + CTRL + h", H.dispatch("movewindow", "l"), {
   description = "move window left",
 })
-hl.bind("SUPER + CTRL + j", hl.dsp.exec_cmd("hyprctl dispatch movewindow d"), {
+hl.bind("SUPER + CTRL + j", H.dispatch("movewindow", "d"), {
   description = "move window down",
 })
-hl.bind("SUPER + CTRL + k", hl.dsp.exec_cmd("hyprctl dispatch movewindow u"), {
+hl.bind("SUPER + CTRL + k", H.dispatch("movewindow", "u"), {
   description = "move window up",
 })
-hl.bind("SUPER + CTRL + l", hl.dsp.exec_cmd("hyprctl dispatch movewindow r"), {
+hl.bind("SUPER + CTRL + l", H.dispatch("movewindow", "r"), {
   description = "move window right",
 })
-hl.bind("SUPER + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreenstate 2 0"), {
+hl.bind("SUPER + F", H.dispatch("fullscreenstate", "2 0"), {
   description = "special fullscreenstate",
 })
 hl.bind("SUPER + Y", hl.dsp.exec_cmd(expand("$scriptsDir/ChangeLayout.sh")), {

@@ -99,12 +99,27 @@ bindd_compat() {
 
     if [ "$dispatcher" = "exec" ]; then
       dispatch_expr="hl.dsp.exec_cmd($(lua_quote "$arg"))"
+    elif [ "$dispatcher" = "movefocus" ]; then
+      dispatch_expr="hl.dsp.focus({ direction = $(lua_quote "$arg") })"
+    elif [ "$dispatcher" = "scroller:movefocus" ]; then
+      dispatch_expr="function() hl.plugin.scroller.move_focus($(lua_quote "$arg")) end"
+    elif [ "$dispatcher" = "movewindow" ]; then
+      dispatch_expr="hl.dsp.window.move({ direction = $(lua_quote "$arg") })"
+    elif [ "$dispatcher" = "scroller:movewindow" ]; then
+      dispatch_expr="function() hl.plugin.scroller.move_window($(lua_quote "$arg")) end"
+    elif [ "$dispatcher" = "scroller:focusmonitor" ]; then
+      dispatch_expr="function() hl.plugin.scroller.focus_monitor($(lua_quote "$arg")) end"
+    elif [ "$dispatcher" = "scroller:togglefullscreen" ]; then
+      dispatch_expr='function() hl.plugin.scroller.toggle_fullscreen() end'
+    elif [ "$dispatcher" = "scroller:toggleoverview" ]; then
+      dispatch_expr='function() hl.plugin.scroller.toggle_overview() end'
+    elif [ "$dispatcher" = "fullscreenstate" ]; then
+      dispatch_expr='hl.dsp.window.fullscreen_state({ internal = 2, client = 0, action = "toggle" })'
+    elif [ "$dispatcher" = "layoutmsg" ]; then
+      dispatch_expr="hl.dsp.layout($(lua_quote "$arg"))"
     else
-      command="hyprctl dispatch $dispatcher"
-      if [ -n "$arg" ]; then
-        command+=" $arg"
-      fi
-      dispatch_expr="hl.dsp.exec_cmd($(lua_quote "$command"))"
+      printf 'Unsupported Lua dispatcher: %s %s\n' "$dispatcher" "$arg" >&2
+      return 1
     fi
 
     hyprctl eval "hl.bind($(lua_quote "$keyseq"), $dispatch_expr, { description = $(lua_quote "$desc") })" >/dev/null

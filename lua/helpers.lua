@@ -59,8 +59,79 @@ local function load_hypr_vars(path)
   file:close()
 end
 
+local directions = {
+  l = "left",
+  r = "right",
+  u = "up",
+  d = "down",
+}
+
+-- Translate legacy dispatcher names into Hyprland's native Lua API.
+local function dispatch(name, arg)
+  arg = arg or ""
+
+  if name == "movefocus" then
+    return hl.dsp.focus({ direction = directions[arg] or arg })
+  elseif name == "movewindow" then
+    return hl.dsp.window.move({ direction = directions[arg] or arg })
+  elseif name == "swapwindow" then
+    return hl.dsp.window.swap({ direction = directions[arg] or arg })
+  elseif name == "workspace" then
+    return hl.dsp.focus({ workspace = arg })
+  elseif name == "movetoworkspace" then
+    return hl.dsp.window.move({ workspace = arg, follow = true })
+  elseif name == "movetoworkspacesilent" then
+    return hl.dsp.window.move({ workspace = arg, follow = false })
+  elseif name == "movecurrentworkspacetomonitor" then
+    return hl.dsp.workspace.move({ monitor = directions[arg] or arg })
+  elseif name == "togglefloating" then
+    return hl.dsp.window.float({ action = "toggle" })
+  elseif name == "fullscreen" then
+    local mode = arg == "1" and "maximized" or "fullscreen"
+    return hl.dsp.window.fullscreen({ mode = mode, action = "toggle" })
+  elseif name == "fullscreenstate" then
+    local internal, client = arg:match("^(%S+)%s+(%S+)$")
+    return hl.dsp.window.fullscreen_state({
+      internal = tonumber(internal),
+      client = tonumber(client),
+      action = "toggle",
+    })
+  elseif name == "killactive" then
+    return hl.dsp.window.close()
+  elseif name == "pseudo" then
+    return hl.dsp.window.pseudo()
+  elseif name == "togglegroup" then
+    return hl.dsp.group.toggle()
+  elseif name == "changegroupactive" then
+    return arg == "b" and hl.dsp.group.prev() or hl.dsp.group.next()
+  elseif name == "layoutmsg" then
+    return hl.dsp.layout(arg)
+  elseif name == "togglespecialworkspace" then
+    return hl.dsp.workspace.toggle_special(arg)
+  elseif name == "cyclenext" then
+    return hl.dsp.window.cycle_next()
+  elseif name == "bringactivetotop" then
+    return hl.dsp.window.bring_to_top()
+  elseif name == "moveintogroup" then
+    return hl.dsp.window.move({ into_group = directions[arg] or arg })
+  elseif name == "moveoutofgroup" then
+    return hl.dsp.window.move({ out_of_group = true })
+  elseif name == "resizeactive" then
+    local x, y = arg:match("^([%-0-9]+)%s+([%-0-9]+)$")
+    return hl.dsp.window.resize({ x = tonumber(x), y = tonumber(y), relative = true })
+  elseif name == "setprop" then
+    local _, prop, value = arg:match("^(%S+)%s+(%S+)%s+(.+)$")
+    return hl.dsp.window.set_prop({ prop = prop, value = value })
+  elseif name == "exit" then
+    return hl.dsp.exit()
+  end
+
+  error("unsupported legacy dispatcher: " .. name .. " " .. arg)
+end
+
 HyprLua = {
   vars = vars,
   expand = expand,
   load_hypr_vars = load_hypr_vars,
+  dispatch = dispatch,
 }

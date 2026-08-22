@@ -6,9 +6,10 @@ vars.mainMod = "SUPER"
 vars.scriptsDir = expand("$HOME/.config/hypr/scripts")
 vars.UserConfigs = expand("$HOME/.config/hypr/UserConfigs")
 vars.UserScripts = expand("$HOME/.config/hypr/UserScripts")
-hl.bind("SUPER + D", hl.dsp.exec_cmd(expand("pkill rofi || true && rofi -show drun -modi drun,filebrowser,run,window")), {
-  description = "app launcher",
-})
+hl.bind("SUPER + D", hl.dsp.exec_cmd(expand("pkill rofi || true && rofi -show drun -modi drun,filebrowser,run,window")),
+  {
+    description = "app launcher",
+  })
 hl.bind("SUPER + B", hl.dsp.exec_cmd(expand("xdg-open \"https://\"")), {
   description = "open default browser",
 })
@@ -54,16 +55,17 @@ hl.bind("SUPER + ALT + V", hl.dsp.exec_cmd(expand("$scriptsDir/ClipManager.sh"))
 hl.bind("SUPER + CTRL + R", hl.dsp.exec_cmd(expand("$scriptsDir/RofiThemeSelector.sh")), {
   description = "rofi theme selector",
 })
-hl.bind("SUPER + CTRL + SHIFT + R", hl.dsp.exec_cmd(expand("pkill rofi || true && $scriptsDir/RofiThemeSelector-modified.sh")), {
-  description = "rofi theme selector (modified)",
-})
-hl.bind("SUPER + SHIFT + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen"), {
+hl.bind("SUPER + CTRL + SHIFT + R",
+  hl.dsp.exec_cmd(expand("pkill rofi || true && $scriptsDir/RofiThemeSelector-modified.sh")), {
+    description = "rofi theme selector (modified)",
+  })
+hl.bind("SUPER + SHIFT + F", H.dispatch("fullscreen", ""), {
   description = "fullscreen",
 })
-hl.bind("SUPER + CTRL + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen 1"), {
+hl.bind("SUPER + CTRL + F", H.dispatch("fullscreen", "1"), {
   description = "maximize window",
 })
-hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("hyprctl dispatch togglefloating"), {
+hl.bind("SUPER + SPACE", H.dispatch("togglefloating", ""), {
   description = "Float current window",
 })
 hl.bind("SUPER + ALT + SPACE", hl.dsp.exec_cmd(expand("hyprctl dispatch workspaceopt allfloat")), {
@@ -72,12 +74,18 @@ hl.bind("SUPER + ALT + SPACE", hl.dsp.exec_cmd(expand("hyprctl dispatch workspac
 hl.bind("SUPER + SHIFT + Return", hl.dsp.exec_cmd(expand("$scriptsDir/Dropterminal.sh $term")), {
   description = "DropDown terminal",
 })
-hl.bind("SUPER + ALT + mouse_down", hl.dsp.exec_cmd(expand("hyprctl keyword cursor:zoom_factor \"$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) {factor = 1}; print factor * 2.0}')\"")), {
-  description = "zoom in",
-})
-hl.bind("SUPER + ALT + mouse_up", hl.dsp.exec_cmd(expand("hyprctl keyword cursor:zoom_factor \"$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) {factor = 1}; print factor / 2.0}')\"")), {
-  description = "zoom out",
-})
+hl.bind("SUPER + ALT + mouse_down",
+  hl.dsp.exec_cmd(expand(
+    "hyprctl keyword cursor:zoom_factor \"$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) {factor = 1}; print factor * 2.0}')\"")),
+  {
+    description = "zoom in",
+  })
+hl.bind("SUPER + ALT + mouse_up",
+  hl.dsp.exec_cmd(expand(
+    "hyprctl keyword cursor:zoom_factor \"$(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {factor = $2; if (factor < 1) {factor = 1}; print factor / 2.0}')\"")),
+  {
+    description = "zoom out",
+  })
 hl.bind("SUPER + CTRL + ALT + B", hl.dsp.exec_cmd(expand("pkill -SIGUSR1 waybar")), {
   description = "toggle waybar on/off",
 })
@@ -102,7 +110,7 @@ hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd(expand("$UserScripts/WallpaperEffec
 hl.bind("CTRL + ALT + W", hl.dsp.exec_cmd(expand("$UserScripts/WallpaperRandom.sh")), {
   description = "random wallpaper",
 })
-hl.bind("SUPER + CTRL + O", hl.dsp.exec_cmd("hyprctl dispatch setprop active opaque toggle"), {
+hl.bind("SUPER + CTRL + O", H.dispatch("setprop", "active opaque toggle"), {
   description = "toggle active window opacity",
 })
 hl.bind("SUPER + SHIFT + K", hl.dsp.exec_cmd(expand("$scriptsDir/KeyBinds.sh")), {
@@ -127,22 +135,22 @@ hl.bind("SHIFT_L + ALT_L", hl.dsp.exec_cmd(expand("$scriptsDir/Tak0-Per-Window-S
 hl.bind("SUPER + ALT + C", hl.dsp.exec_cmd(expand("$UserScripts/RofiCalc.sh")), {
   description = "calculator",
 })
-hl.bind("SUPER + CTRL + F9", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor l"), {
+hl.bind("SUPER + CTRL + F9", H.dispatch("movecurrentworkspacetomonitor", "l"), {
   description = "move workspace to left monitor",
 })
-hl.bind("SUPER + CTRL + F10", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor r"), {
+hl.bind("SUPER + CTRL + F10", H.dispatch("movecurrentworkspacetomonitor", "r"), {
   description = "move workspace to right monitor",
 })
-hl.bind("SUPER + CTRL + F11", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor u"), {
+hl.bind("SUPER + CTRL + F11", H.dispatch("movecurrentworkspacetomonitor", "u"), {
   description = "move workspace to up monitor",
 })
-hl.bind("SUPER + CTRL + F12", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor d"), {
+hl.bind("SUPER + CTRL + F12", H.dispatch("movecurrentworkspacetomonitor", "d"), {
   description = "move workspace to down monitor",
 })
-hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(expand("hyprctl dispatch exit 0")), {
+hl.bind("CTRL + ALT + Delete", H.dispatch("exit"), {
   description = "exit Hyprland",
 })
-hl.bind("SUPER + Q", hl.dsp.exec_cmd("hyprctl dispatch killactive"), {
+hl.bind("SUPER + Q", H.dispatch("killactive", ""), {
   description = "close active window",
 })
 hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd(expand("$scriptsDir/KillActiveProcess.sh")), {
@@ -160,22 +168,22 @@ hl.bind("SUPER + SHIFT + N", hl.dsp.exec_cmd(expand("swaync-client -t -sw")), {
 hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(expand("$scriptsDir/Kool_Quick_Settings.sh")), {
   description = "Quick settings menu",
 })
-hl.bind("SUPER + CTRL + D", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg removemaster"), {
+hl.bind("SUPER + CTRL + D", H.dispatch("layoutmsg", "removemaster"), {
   description = "remove master",
 })
-hl.bind("SUPER + I", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg addmaster"), {
+hl.bind("SUPER + I", H.dispatch("layoutmsg", "addmaster"), {
   description = "add master",
 })
-hl.bind("SUPER + CTRL + Return", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg swapwithmaster"), {
+hl.bind("SUPER + CTRL + Return", H.dispatch("layoutmsg", "swapwithmaster"), {
   description = "swap with master",
 })
-hl.bind("SUPER + SHIFT + I", hl.dsp.exec_cmd("hyprctl dispatch layoutmsg togglesplit"), {
+hl.bind("SUPER + SHIFT + I", H.dispatch("layoutmsg", "togglesplit"), {
   description = "toggle split (dwindle)",
 })
-hl.bind("SUPER + P", hl.dsp.exec_cmd("hyprctl dispatch pseudo"), {
+hl.bind("SUPER + P", H.dispatch("pseudo", ""), {
   description = "toggle pseudo (dwindle)",
 })
-hl.bind("SUPER + M", hl.dsp.exec_cmd(expand("hyprctl dispatch layoutmsg splitratio 0.3 exact")), {
+hl.bind("SUPER + M", H.dispatch("layoutmsg", "splitratio 0.3 exact"), {
   description = "set split ratio 0.3",
 })
 hl.on("hyprland.start", function()
@@ -184,10 +192,10 @@ end)
 hl.on("config.reloaded", function()
   hl.exec_cmd(expand("$scriptsDir/ChangeLayout.sh init"))
 end)
-hl.bind("ALT + tab", hl.dsp.exec_cmd("hyprctl dispatch cyclenext"), {
+hl.bind("ALT + tab", H.dispatch("cyclenext", ""), {
   description = "cycle next window",
 })
-hl.bind("ALT + tab", hl.dsp.exec_cmd("hyprctl dispatch bringactivetotop"), {
+hl.bind("ALT + tab", H.dispatch("bringactivetotop", ""), {
   description = "bring active to top",
 })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(expand("$scriptsDir/Volume.sh --inc")), {
@@ -268,203 +276,203 @@ hl.bind("ALT + Print", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenShot.sh --activ
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenShot.sh --swappy")), {
   description = "screenshot (swappy)",
 })
-hl.bind("SUPER + SHIFT + left", hl.dsp.exec_cmd("hyprctl dispatch resizeactive -50 0"), {
+hl.bind("SUPER + SHIFT + left", H.dispatch("resizeactive", "-50 0"), {
   repeating = true,
   description = "resize left (-50)",
 })
-hl.bind("SUPER + SHIFT + right", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 50 0"), {
+hl.bind("SUPER + SHIFT + right", H.dispatch("resizeactive", "50 0"), {
   repeating = true,
   description = "resize right (+50)",
 })
-hl.bind("SUPER + SHIFT + up", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 -50"), {
+hl.bind("SUPER + SHIFT + up", H.dispatch("resizeactive", "0 -50"), {
   repeating = true,
   description = "resize up (-50)",
 })
-hl.bind("SUPER + SHIFT + down", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 50"), {
+hl.bind("SUPER + SHIFT + down", H.dispatch("resizeactive", "0 50"), {
   repeating = true,
   description = "resize down (+50)",
 })
-hl.bind("SUPER + CTRL + left", hl.dsp.exec_cmd("hyprctl dispatch movewindow l"), {
+hl.bind("SUPER + CTRL + left", H.dispatch("movewindow", "l"), {
   description = "move window left",
 })
-hl.bind("SUPER + CTRL + right", hl.dsp.exec_cmd("hyprctl dispatch movewindow r"), {
+hl.bind("SUPER + CTRL + right", H.dispatch("movewindow", "r"), {
   description = "move window right",
 })
-hl.bind("SUPER + CTRL + up", hl.dsp.exec_cmd("hyprctl dispatch movewindow u"), {
+hl.bind("SUPER + CTRL + up", H.dispatch("movewindow", "u"), {
   description = "move window up",
 })
-hl.bind("SUPER + CTRL + down", hl.dsp.exec_cmd("hyprctl dispatch movewindow d"), {
+hl.bind("SUPER + CTRL + down", H.dispatch("movewindow", "d"), {
   description = "move window down",
 })
-hl.bind("SUPER + ALT + left", hl.dsp.exec_cmd("hyprctl dispatch swapwindow l"), {
+hl.bind("SUPER + ALT + left", H.dispatch("swapwindow", "l"), {
   description = "swap window left",
 })
-hl.bind("SUPER + ALT + right", hl.dsp.exec_cmd("hyprctl dispatch swapwindow r"), {
+hl.bind("SUPER + ALT + right", H.dispatch("swapwindow", "r"), {
   description = "swap window right",
 })
-hl.bind("SUPER + ALT + up", hl.dsp.exec_cmd("hyprctl dispatch swapwindow u"), {
+hl.bind("SUPER + ALT + up", H.dispatch("swapwindow", "u"), {
   description = "swap window up",
 })
-hl.bind("SUPER + ALT + down", hl.dsp.exec_cmd("hyprctl dispatch swapwindow d"), {
+hl.bind("SUPER + ALT + down", H.dispatch("swapwindow", "d"), {
   description = "swap window down",
 })
-hl.bind("SUPER + G", hl.dsp.exec_cmd("hyprctl dispatch togglegroup"), {
+hl.bind("SUPER + G", H.dispatch("togglegroup", ""), {
   description = "toggle group",
 })
-hl.bind("SUPER + Tab", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive f"), {
+hl.bind("SUPER + Tab", H.dispatch("changegroupactive", "f"), {
   description = "Change Group Forward",
 })
-hl.bind("SUPER + CTRL + tab", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive"), {
+hl.bind("SUPER + CTRL + tab", H.dispatch("changegroupactive", ""), {
   description = "change active in group",
 })
-hl.bind("SUPER + SHIFT + Tab", hl.dsp.exec_cmd("hyprctl dispatch changegroupactive b"), {
+hl.bind("SUPER + SHIFT + Tab", H.dispatch("changegroupactive", "b"), {
   description = "Change Group Back",
 })
-hl.bind("SUPER + CTRL + K", hl.dsp.exec_cmd("hyprctl dispatch moveintogroup l"), {
+hl.bind("SUPER + CTRL + K", H.dispatch("moveintogroup", "l"), {
   description = "Move left into group",
 })
-hl.bind("SUPER + CTRL + L", hl.dsp.exec_cmd("hyprctl dispatch moveintogroup r"), {
+hl.bind("SUPER + CTRL + L", H.dispatch("moveintogroup", "r"), {
   description = "Move Right into group",
 })
-hl.bind("SUPER + CTRL + H", hl.dsp.exec_cmd("hyprctl dispatch moveoutofgroup"), {
+hl.bind("SUPER + CTRL + H", H.dispatch("moveoutofgroup", ""), {
   description = "Move active out of group",
 })
-hl.bind("SUPER + left", hl.dsp.exec_cmd("hyprctl dispatch movefocus l"), {
+hl.bind("SUPER + left", H.dispatch("movefocus", "l"), {
   description = "focus left",
 })
-hl.bind("SUPER + right", hl.dsp.exec_cmd("hyprctl dispatch movefocus r"), {
+hl.bind("SUPER + right", H.dispatch("movefocus", "r"), {
   description = "focus right",
 })
-hl.bind("SUPER + up", hl.dsp.exec_cmd("hyprctl dispatch movefocus u"), {
+hl.bind("SUPER + up", H.dispatch("movefocus", "u"), {
   description = "focus up",
 })
-hl.bind("SUPER + down", hl.dsp.exec_cmd("hyprctl dispatch movefocus d"), {
+hl.bind("SUPER + down", H.dispatch("movefocus", "d"), {
   description = "focus down",
 })
-hl.bind("SUPER + tab", hl.dsp.exec_cmd("hyprctl dispatch workspace m+1"), {
+hl.bind("SUPER + tab", H.dispatch("workspace", "m+1"), {
   description = "next workspace",
 })
-hl.bind("SUPER + SHIFT + tab", hl.dsp.exec_cmd("hyprctl dispatch workspace m-1"), {
+hl.bind("SUPER + SHIFT + tab", H.dispatch("workspace", "m-1"), {
   description = "previous workspace",
 })
-hl.bind("SUPER + SHIFT + U", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace special"), {
+hl.bind("SUPER + SHIFT + U", H.dispatch("movetoworkspace", "special"), {
   description = "move to special workspace",
 })
-hl.bind("SUPER + U", hl.dsp.exec_cmd("hyprctl dispatch togglespecialworkspace"), {
+hl.bind("SUPER + U", H.dispatch("togglespecialworkspace", ""), {
   description = "toggle special workspace",
 })
-hl.bind("SUPER + code:10", hl.dsp.exec_cmd("hyprctl dispatch workspace 1"), {
+hl.bind("SUPER + code:10", H.dispatch("workspace", "1"), {
   description = "workspace 1",
 })
-hl.bind("SUPER + code:11", hl.dsp.exec_cmd("hyprctl dispatch workspace 2"), {
+hl.bind("SUPER + code:11", H.dispatch("workspace", "2"), {
   description = "workspace 2",
 })
-hl.bind("SUPER + code:12", hl.dsp.exec_cmd("hyprctl dispatch workspace 3"), {
+hl.bind("SUPER + code:12", H.dispatch("workspace", "3"), {
   description = "workspace 3",
 })
-hl.bind("SUPER + code:13", hl.dsp.exec_cmd("hyprctl dispatch workspace 4"), {
+hl.bind("SUPER + code:13", H.dispatch("workspace", "4"), {
   description = "workspace 4",
 })
-hl.bind("SUPER + code:14", hl.dsp.exec_cmd("hyprctl dispatch workspace 5"), {
+hl.bind("SUPER + code:14", H.dispatch("workspace", "5"), {
   description = "workspace 5",
 })
-hl.bind("SUPER + code:15", hl.dsp.exec_cmd("hyprctl dispatch workspace 6"), {
+hl.bind("SUPER + code:15", H.dispatch("workspace", "6"), {
   description = "workspace 6",
 })
-hl.bind("SUPER + code:16", hl.dsp.exec_cmd("hyprctl dispatch workspace 7"), {
+hl.bind("SUPER + code:16", H.dispatch("workspace", "7"), {
   description = "workspace 7",
 })
-hl.bind("SUPER + code:17", hl.dsp.exec_cmd("hyprctl dispatch workspace 8"), {
+hl.bind("SUPER + code:17", H.dispatch("workspace", "8"), {
   description = "workspace 8",
 })
-hl.bind("SUPER + code:18", hl.dsp.exec_cmd("hyprctl dispatch workspace 9"), {
+hl.bind("SUPER + code:18", H.dispatch("workspace", "9"), {
   description = "workspace 9",
 })
-hl.bind("SUPER + code:19", hl.dsp.exec_cmd("hyprctl dispatch workspace 10"), {
+hl.bind("SUPER + code:19", H.dispatch("workspace", "10"), {
   description = "workspace 10",
 })
-hl.bind("SUPER + SHIFT + code:10", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 1"), {
+hl.bind("SUPER + SHIFT + code:10", H.dispatch("movetoworkspace", "1"), {
   description = "move to workspace 1",
 })
-hl.bind("SUPER + SHIFT + code:11", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 2"), {
+hl.bind("SUPER + SHIFT + code:11", H.dispatch("movetoworkspace", "2"), {
   description = "move to workspace 2",
 })
-hl.bind("SUPER + SHIFT + code:12", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 3"), {
+hl.bind("SUPER + SHIFT + code:12", H.dispatch("movetoworkspace", "3"), {
   description = "move to workspace 3",
 })
-hl.bind("SUPER + SHIFT + code:13", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 4"), {
+hl.bind("SUPER + SHIFT + code:13", H.dispatch("movetoworkspace", "4"), {
   description = "move to workspace 4",
 })
-hl.bind("SUPER + SHIFT + code:14", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 5"), {
+hl.bind("SUPER + SHIFT + code:14", H.dispatch("movetoworkspace", "5"), {
   description = "move to workspace 5",
 })
-hl.bind("SUPER + SHIFT + code:15", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 6"), {
+hl.bind("SUPER + SHIFT + code:15", H.dispatch("movetoworkspace", "6"), {
   description = "move to workspace 6",
 })
-hl.bind("SUPER + SHIFT + code:16", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 7"), {
+hl.bind("SUPER + SHIFT + code:16", H.dispatch("movetoworkspace", "7"), {
   description = "move to workspace 7",
 })
-hl.bind("SUPER + SHIFT + code:17", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 8"), {
+hl.bind("SUPER + SHIFT + code:17", H.dispatch("movetoworkspace", "8"), {
   description = "move to workspace 8",
 })
-hl.bind("SUPER + SHIFT + code:18", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 9"), {
+hl.bind("SUPER + SHIFT + code:18", H.dispatch("movetoworkspace", "9"), {
   description = "move to workspace 9",
 })
-hl.bind("SUPER + SHIFT + code:19", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace 10"), {
+hl.bind("SUPER + SHIFT + code:19", H.dispatch("movetoworkspace", "10"), {
   description = "move to workspace 10",
 })
-hl.bind("SUPER + SHIFT + bracketleft", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace -1"), {
+hl.bind("SUPER + SHIFT + bracketleft", H.dispatch("movetoworkspace", "-1"), {
   description = "move to previous workspace",
 })
-hl.bind("SUPER + SHIFT + bracketright", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspace +1"), {
+hl.bind("SUPER + SHIFT + bracketright", H.dispatch("movetoworkspace", "+1"), {
   description = "move to next workspace",
 })
-hl.bind("SUPER + CTRL + code:10", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 1"), {
+hl.bind("SUPER + CTRL + code:10", H.dispatch("movetoworkspacesilent", "1"), {
   description = "move silently to workspace 1",
 })
-hl.bind("SUPER + CTRL + code:11", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 2"), {
+hl.bind("SUPER + CTRL + code:11", H.dispatch("movetoworkspacesilent", "2"), {
   description = "move silently to workspace 2",
 })
-hl.bind("SUPER + CTRL + code:12", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 3"), {
+hl.bind("SUPER + CTRL + code:12", H.dispatch("movetoworkspacesilent", "3"), {
   description = "move silently to workspace 3",
 })
-hl.bind("SUPER + CTRL + code:13", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 4"), {
+hl.bind("SUPER + CTRL + code:13", H.dispatch("movetoworkspacesilent", "4"), {
   description = "move silently to workspace 4",
 })
-hl.bind("SUPER + CTRL + code:14", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 5"), {
+hl.bind("SUPER + CTRL + code:14", H.dispatch("movetoworkspacesilent", "5"), {
   description = "move silently to workspace 5",
 })
-hl.bind("SUPER + CTRL + code:15", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 6"), {
+hl.bind("SUPER + CTRL + code:15", H.dispatch("movetoworkspacesilent", "6"), {
   description = "move silently to workspace 6",
 })
-hl.bind("SUPER + CTRL + code:16", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 7"), {
+hl.bind("SUPER + CTRL + code:16", H.dispatch("movetoworkspacesilent", "7"), {
   description = "move silently to workspace 7",
 })
-hl.bind("SUPER + CTRL + code:17", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 8"), {
+hl.bind("SUPER + CTRL + code:17", H.dispatch("movetoworkspacesilent", "8"), {
   description = "move silently to workspace 8",
 })
-hl.bind("SUPER + CTRL + code:18", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 9"), {
+hl.bind("SUPER + CTRL + code:18", H.dispatch("movetoworkspacesilent", "9"), {
   description = "move silently to workspace 9",
 })
-hl.bind("SUPER + CTRL + code:19", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent 10"), {
+hl.bind("SUPER + CTRL + code:19", H.dispatch("movetoworkspacesilent", "10"), {
   description = "move silently to workspace 10",
 })
-hl.bind("SUPER + CTRL + bracketleft", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent -1"), {
+hl.bind("SUPER + CTRL + bracketleft", H.dispatch("movetoworkspacesilent", "-1"), {
   description = "move silently to previous workspace",
 })
-hl.bind("SUPER + CTRL + bracketright", hl.dsp.exec_cmd("hyprctl dispatch movetoworkspacesilent +1"), {
+hl.bind("SUPER + CTRL + bracketright", H.dispatch("movetoworkspacesilent", "+1"), {
   description = "move silently to next workspace",
 })
-hl.bind("SUPER + mouse_down", hl.dsp.exec_cmd("hyprctl dispatch workspace e+1"), {
+hl.bind("SUPER + mouse_down", H.dispatch("workspace", "e+1"), {
   description = "next workspace",
 })
-hl.bind("SUPER + mouse_up", hl.dsp.exec_cmd("hyprctl dispatch workspace e-1"), {
+hl.bind("SUPER + mouse_up", H.dispatch("workspace", "e-1"), {
   description = "previous workspace",
 })
-hl.bind("SUPER + period", hl.dsp.exec_cmd("hyprctl dispatch workspace e+1"), {
+hl.bind("SUPER + period", H.dispatch("workspace", "e+1"), {
   description = "next workspace",
 })
-hl.bind("SUPER + comma", hl.dsp.exec_cmd("hyprctl dispatch workspace e-1"), {
+hl.bind("SUPER + comma", H.dispatch("workspace", "e-1"), {
   description = "previous workspace",
 })
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), {
