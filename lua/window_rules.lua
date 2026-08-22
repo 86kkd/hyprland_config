@@ -1,16 +1,5 @@
--- Generated from legacy Hyprland .conf files.
--- Module: window_rules
--- Sources:
---   configs/WindowRules.conf
---   UserConfigs/WindowRules.conf
+local expand = HyprLua.expand
 
-local H = HyprLua
-local vars = H.vars
-local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
-
-
--- Source: configs/WindowRules.conf
 hl.window_rule({
   match = {
     class = expand("^([Ff]irefox|org.mozilla.firefox|[Ff]irefox-esr|[Ff]irefox-bin)$"),

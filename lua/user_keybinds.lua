@@ -1,19 +1,11 @@
--- Generated from legacy Hyprland .conf files.
--- Module: user_keybinds
--- Sources:
---   UserConfigs/UserKeybinds.conf
-
 local H = HyprLua
 local vars = H.vars
 local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
 
-
--- Source: UserConfigs/UserKeybinds.conf
-vars["mainMod"] = H.expand("SUPER")
-vars["scriptsDir"] = H.expand("$HOME/.config/hypr/scripts")
-vars["UserScripts"] = H.expand("$HOME/.config/hypr/UserScripts")
-vars["UserConfigs"] = H.expand("$HOME/.config/hypr/UserConfigs")
+vars.mainMod = "SUPER"
+vars.scriptsDir = expand("$HOME/.config/hypr/scripts")
+vars.UserScripts = expand("$HOME/.config/hypr/UserScripts")
+vars.UserConfigs = expand("$HOME/.config/hypr/UserConfigs")
 hl.unbind("SUPER + SPACE")
 hl.unbind("SUPER + H")
 hl.unbind("SUPER + ALT + L")

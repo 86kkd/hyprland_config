@@ -1,15 +1,4 @@
--- Generated from legacy Hyprland .conf files.
--- Module: monitors
--- Sources:
---   monitors.conf
-
-local H = HyprLua
-local vars = H.vars
-local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
-
-
--- Source: monitors.conf
+-- Monitor layout. Position uses physical pixels; scale is per output.
 hl.monitor({
   output = "DP-3",
   mode = "3840x2160@160.0",

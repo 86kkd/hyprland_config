@@ -1,20 +1,11 @@
--- Generated from legacy Hyprland .conf files.
--- Module: keybinds
--- Sources:
---   configs/Keybinds.conf
-
 local H = HyprLua
 local vars = H.vars
 local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
 
-
--- Source: configs/Keybinds.conf
-vars["mainMod"] = H.expand("SUPER")
-vars["scriptsDir"] = H.expand("$HOME/.config/hypr/scripts")
-vars["UserConfigs"] = H.expand("$HOME/.config/hypr/UserConfigs")
-vars["UserScripts"] = H.expand("$HOME/.config/hypr/UserScripts")
--- Legacy source handled by hyprland.lua load order: UserConfigs/01-UserDefaults.conf
+vars.mainMod = "SUPER"
+vars.scriptsDir = expand("$HOME/.config/hypr/scripts")
+vars.UserConfigs = expand("$HOME/.config/hypr/UserConfigs")
+vars.UserScripts = expand("$HOME/.config/hypr/UserScripts")
 hl.bind("SUPER + D", hl.dsp.exec_cmd(expand("pkill rofi || true && rofi -show drun -modi drun,filebrowser,run,window")), {
   description = "app launcher",
 })

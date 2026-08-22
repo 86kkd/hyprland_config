@@ -1,15 +1,4 @@
--- Generated from legacy Hyprland .conf files.
--- Module: animations
--- Sources:
---   UserConfigs/UserAnimations.conf
-
-local H = HyprLua
-local vars = H.vars
-local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
-
-
--- Source: UserConfigs/UserAnimations.conf
+-- Animation preset. Hyprland 0.56 limits animation speed to 100.
 hl.config({ animations = { enabled = true } })
 hl.curve("wind", { type = "bezier", points = { {0.05, 0.9}, {0.1, 1.05} } })
 hl.curve("winIn", { type = "bezier", points = { {0.1, 1.1}, {0.1, 1.1} } })

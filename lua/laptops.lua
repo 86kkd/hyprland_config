@@ -1,21 +1,11 @@
--- Generated from legacy Hyprland .conf files.
--- Module: laptops
--- Sources:
---   configs/Laptops.conf
---   UserConfigs/Laptops.conf
---   UserConfigs/LaptopDisplay.conf
-
 local H = HyprLua
 local vars = H.vars
 local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
 
-
--- Source: configs/Laptops.conf
-vars["mainMod"] = H.expand("SUPER")
-vars["scriptsDir"] = H.expand("$HOME/.config/hypr/scripts")
-vars["UserConfigs"] = H.expand("$HOME/.config/hypr/UserConfigs")
-vars["Touchpad_Device"] = H.expand("asue1209:00-04f3:319f-touchpad")
+vars.mainMod = "SUPER"
+vars.scriptsDir = expand("$HOME/.config/hypr/scripts")
+vars.UserConfigs = expand("$HOME/.config/hypr/UserConfigs")
+vars.Touchpad_Device = "asue1209:00-04f3:319f-touchpad"
 hl.bind("XF86KbdBrightnessDown", hl.dsp.exec_cmd(expand("$scriptsDir/BrightnessKbd.sh --dec")), {
   repeating = true,
 })
@@ -37,15 +27,8 @@ hl.bind("SUPER + SHIFT + F6", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenShot.sh 
 hl.bind("SUPER + CTRL + F6", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenShot.sh --in5")))
 hl.bind("SUPER + ALT + F6", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenShot.sh --in10")))
 hl.bind("ALT + F6", hl.dsp.exec_cmd(expand("$scriptsDir/ScreenShot.sh --active")))
-vars["TOUCHPAD_ENABLED"] = H.expand("true")
+vars.TOUCHPAD_ENABLED = "true"
 hl.device({
   name = expand("$Touchpad_Device"),
   enabled = true,
 })
-
--- Source: UserConfigs/Laptops.conf
-vars["mainMod"] = H.expand("SUPER")
-vars["scriptsDir"] = H.expand("$HOME/.config/hypr/scripts")
-vars["UserConfigs"] = H.expand("$HOME/.config/hypr/UserConfigs")
-
--- Source: UserConfigs/LaptopDisplay.conf

@@ -1,5 +1,5 @@
--- Hyprland Lua config entrypoint.
--- Split modules mirror the old hyprland.conf source order.
+-- Hyprland configuration entrypoint.
+-- Each module owns one part of the configuration and is loaded in this order.
 
 local function load_module(name)
   require("lua/" .. name)
@@ -18,7 +18,5 @@ load_module("decorations")
 load_module("animations")
 load_module("user_keybinds")
 load_module("user_settings")
-load_module("user_defaults")
 load_module("monitors")
 load_module("workspaces")
-load_module("migration_notes")

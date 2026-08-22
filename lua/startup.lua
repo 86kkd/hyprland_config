@@ -1,63 +1,34 @@
--- Generated from legacy Hyprland .conf files.
--- Module: startup
--- Sources:
---   configs/Startup_Apps.conf
---   UserConfigs/Startup_Apps.conf
-
 local H = HyprLua
 local vars = H.vars
 local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
 
+vars.scriptsDir = expand("$HOME/.config/hypr/scripts")
+vars.UserScripts = expand("$HOME/.config/hypr/UserScripts")
+vars.lock = expand("$scriptsDir/LockScreen.sh")
+vars.SwwwRandom = expand("$UserScripts/WallpaperAutoChange.sh")
+vars.livewallpaper = ""
+vars.wallDIR = expand("$HOME/Pictures/wallpapers")
 
--- Source: configs/Startup_Apps.conf
-vars["scriptsDir"] = H.expand("$HOME/.config/hypr/scripts")
-vars["UserScripts"] = H.expand("$HOME/.config/hypr/UserScripts")
-vars["lock"] = H.expand("$scriptsDir/LockScreen.sh")
-vars["SwwwRandom"] = H.expand("$UserScripts/WallpaperAutoChange.sh")
-vars["livewallpaper"] = H.expand("")
-vars["wallDIR"] = H.expand("$HOME/Pictures/wallpapers")
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("$scriptsDir/WallpaperBackend.sh start-daemon --format xrgb"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("$HOME/.config/hypr/scripts/Dropterminal.sh kitty &"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("$scriptsDir/Polkit.sh"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("nm-applet --indicator"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("nm-tray"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("swaync"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("waybar"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("qs -c overview"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("hypridle"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("$scriptsDir/Hyprsunset.sh init"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("wl-paste --type text --watch cliphist store"))
-end)
-hl.on("hyprland.start", function()
-  hl.exec_cmd(expand("wl-paste --type image --watch cliphist store"))
-end)
+local autostart = {
+  "$scriptsDir/WallpaperBackend.sh start-daemon --format xrgb",
+  "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+  "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP",
+  "$scriptsDir/Dropterminal.sh kitty &",
+  "$scriptsDir/Polkit.sh",
+  "nm-applet --indicator",
+  "nm-tray",
+  "swaync",
+  "waybar",
+  "qs -c overview",
+  "hypridle",
+  "$scriptsDir/Hyprsunset.sh init",
+  "wl-paste --type text --watch cliphist store",
+  "wl-paste --type image --watch cliphist store",
+}
 
--- Source: UserConfigs/Startup_Apps.conf
+for _, command in ipairs(autostart) do
+  local startup_command = command
+  hl.on("hyprland.start", function()
+    hl.exec_cmd(expand(startup_command))
+  end)
+end

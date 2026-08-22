@@ -1,31 +1,21 @@
--- Generated from legacy Hyprland .conf files.
--- Module: env
--- Sources:
---   configs/ENVariables.conf
---   UserConfigs/ENVariables.conf
+local environment = {
+  DOTS_VERSION = "2.3.20",
+  GDK_BACKEND = "wayland,x11,*",
+  QT_QPA_PLATFORM = "wayland;xcb",
+  CLUTTER_BACKEND = "wayland",
+  XDG_CURRENT_DESKTOP = "Hyprland",
+  XDG_SESSION_DESKTOP = "Hyprland",
+  XDG_SESSION_TYPE = "wayland",
+  QT_AUTO_SCREEN_SCALE_FACTOR = "1",
+  QT_WAYLAND_DISABLE_WINDOWDECORATION = "1",
+  QT_QPA_PLATFORMTHEME = "qt6ct",
+  QT_QUICK_CONTROLS_STYLE = "org.hyprland.style",
+  GDK_SCALE = "1",
+  QT_SCALE_FACTOR = "1",
+  MOZ_ENABLE_WAYLAND = "1",
+  ELECTRON_OZONE_PLATFORM_HINT = "auto",
+}
 
-local H = HyprLua
-local vars = H.vars
-local expand = H.expand
-local load_hypr_vars = H.load_hypr_vars
-
-
--- Source: configs/ENVariables.conf
-hl.env("DOTS_VERSION", expand("2.3.20"))
-hl.env("GDK_BACKEND", expand("wayland,x11,*"))
-hl.env("QT_QPA_PLATFORM", expand("wayland;xcb"))
-hl.env("CLUTTER_BACKEND", expand("wayland"))
-hl.env("XDG_CURRENT_DESKTOP", expand("Hyprland"))
-hl.env("XDG_SESSION_DESKTOP", expand("Hyprland"))
-hl.env("XDG_SESSION_TYPE", expand("wayland"))
-hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", expand("1"))
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", expand("1"))
-hl.env("QT_QPA_PLATFORMTHEME", expand("qt5ct"))
-hl.env("QT_QPA_PLATFORMTHEME", expand("qt6ct"))
-hl.env("QT_QUICK_CONTROLS_STYLE", expand("org.hyprland.style"))
-hl.env("GDK_SCALE", expand("1"))
-hl.env("QT_SCALE_FACTOR", expand("1"))
-hl.env("MOZ_ENABLE_WAYLAND", expand("1"))
-hl.env("ELECTRON_OZONE_PLATFORM_HINT", expand("auto"))
-
--- Source: UserConfigs/ENVariables.conf
+for name, value in pairs(environment) do
+  hl.env(name, value)
+end
