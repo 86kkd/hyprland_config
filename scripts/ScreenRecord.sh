@@ -154,16 +154,16 @@ if [ "$AUDIO_MODE" != "none" ]; then
   command -v pactl >/dev/null 2>&1 || { echo "未找到 pactl，无法选择音频源" 1>&2; exit 1; }
   case "$AUDIO_MODE" in
     system)
-      DEFAULT_SINK=$(pactl info | awk -F': ' '/Default Sink/{print $2}')
+      DEFAULT_SINK=$(pactl get-default-sink)
       [ -n "${DEFAULT_SINK:-}" ] || { echo "无法获取默认输出 (sink)" 1>&2; exit 1; }
       AUDIO_SOURCE="${DEFAULT_SINK}.monitor"
       ;;
     mic)
-      AUDIO_SOURCE=$(pactl info | awk -F': ' '/Default Source/{print $2}')
+      AUDIO_SOURCE=$(pactl get-default-source)
       [ -n "${AUDIO_SOURCE:-}" ] || { echo "无法获取默认输入 (source)" 1>&2; exit 1; }
       ;;
   esac
-  ARGS+=( -a -A "$AUDIO_SOURCE" )
+  ARGS+=( "--audio=$AUDIO_SOURCE" )
 fi
 
 # -------------------- 倒计时（arming） --------------------

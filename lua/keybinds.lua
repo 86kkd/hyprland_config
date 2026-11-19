@@ -469,13 +469,13 @@ hl.bind("SUPER + period", H.dispatch("workspace", "e+1"), {
 hl.bind("SUPER + comma", H.dispatch("workspace", "e-1"), {
   description = "previous workspace",
 })
-hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), {
-  mouse = true,
-  drag = true,
-  description = "move window",
-})
-hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), {
-  mouse = true,
-  drag = true,
-  description = "resize window",
-})
+-- hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), {
+--   mouse = true,
+--   drag = true,
+--   description = "move window",
+-- })
+-- hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), {
+--   mouse = true,
+--   drag = true,
+--   description = "resize window",
+-- })

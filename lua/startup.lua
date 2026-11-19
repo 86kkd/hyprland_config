@@ -17,7 +17,7 @@ local autostart = {
   "$scriptsDir/Polkit.sh",
   "nm-applet --indicator",
   "nm-tray",
-  "fcitex5 -d",
+  "fcitx5 -d",
   "swaync",
   "waybar",
   "qs -c overview",

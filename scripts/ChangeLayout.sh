@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# for changing Hyprland layouts (Master, Dwindle, or Scroller) on the fly
+# Local Hyprland layout-switch helper tracked in this repository for reference.
+# Supports both legacy and Lua config providers.
+# Lua keybinds are installed by the Lua config and refreshed after layout changes.
+# Load examples/scroller-workspaces.lua after user_keybinds.lua to replace native
+# per-monitor workspace shortcuts with global canvas switching.
+# Source path on the maintainer machine:
+#   ~/.config/hypr/scripts/ChangeLayout.sh
 
 set -euo pipefail
 
@@ -86,7 +91,6 @@ bindd_compat() {
     local dispatcher
     local arg
     local keyseq
-    local command
     local dispatch_expr
 
     IFS=, read -r mods key desc dispatcher arg <<< "$spec"
@@ -249,3 +253,18 @@ case "$target_layout" in
     fi
     ;;
 esac
+
+# Lua bindings are closures that inspect the current layout at invocation time.
+# Reinstall after a layout change to clear conflicting native workspace binds.
+if is_lua_provider; then
+  bindings_path="$HOME/.config/hypr/lua/scroller-workspaces.lua"
+  if [ ! -f "$bindings_path" ]; then
+    printf 'Missing scroller workspace bindings: %s\n' "$bindings_path" >&2
+    exit 1
+  fi
+  bindings_result=$(hyprctl eval "dofile($(lua_quote "$bindings_path"))")
+  if [ "$bindings_result" != "ok" ]; then
+    printf '%s\n' "$bindings_result" >&2
+    exit 1
+  fi
+fi
